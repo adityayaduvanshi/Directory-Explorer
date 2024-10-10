@@ -78,6 +78,14 @@ body {
 }
 /* Custom Scrollbar Styles */
 .custom-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+/* .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e0 #edf2f7;
 }
@@ -99,4 +107,4 @@ body {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #a0aec0;
-}
+} */

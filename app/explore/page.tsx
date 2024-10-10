@@ -1,34 +1,21 @@
 import { SuggestDirectoryModal } from '@/components/explore/directory-submit-form';
+import { ExploreHeader } from '@/components/explore/header';
 import DirectoryTable from '@/components/explore/table/directory-table';
+import GetAlert from '@/components/get-alert';
+import { Logo } from '@/components/logo/logo';
 import { Button } from '@/components/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 
 export default function ExplorePage() {
   return (
-    <div className="space-y-6">
-      <header className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">Directory Explorer</h1>
-          <p className="text-sm text-gray-500">
-            Find the best directories to explore or list products
-          </p>
-          <p className="text-sm text-gray-500">
-            #550 directories listed | Community-driven | Free
-          </p>
-        </div>
-        <div className="space-x-2">
-          <Button variant="outline">Get Alerts</Button>
+    <div className="space-y-2">
+      <header className="hidden md:flex px-2 md:px-6 justify-between  items-start">
+        <Logo />
+        <div className=" flex items-center gap-2">
+          <GetAlert />
           <SuggestDirectoryModal />
         </div>
       </header>
-
+      <ExploreHeader />
       <div className="bg-white p-6 rounded-lg ">
         {/* <div className="mb-4">
      

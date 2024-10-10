@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className={`border border-gray-100
+                    className={`
                       ${cell.column.id === 'name' ? 'text-left' : 'text-center'}
                     `}
                   >

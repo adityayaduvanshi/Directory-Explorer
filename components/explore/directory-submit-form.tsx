@@ -72,7 +72,9 @@ export function SuggestDirectoryModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>+ Suggest a directory</Button>
+        <Button className=" bg-black rounded-2xl " size="sm">
+          + Suggest a Directory
+        </Button>
       </DialogTrigger>
       <DialogContent aria-describedby="" className="sm:max-w-[425px]">
         <DialogHeader>

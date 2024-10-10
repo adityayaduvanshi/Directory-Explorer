@@ -22,8 +22,11 @@ export default async function ExploreLayout({
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-1 p-8">{children}</main>
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
+
+      <main className="flex-1 py-4 px-1 md:px-8">{children}</main>
     </div>
   );
 }

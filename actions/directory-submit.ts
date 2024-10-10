@@ -10,6 +10,7 @@ type SubmitDirectoryData = {
   contactInfo: string;
   runDirectory: boolean;
   message: string;
+  requestedCategory: string;
 };
 
 export async function submitDirectory(data: SubmitDirectoryData) {
@@ -30,6 +31,7 @@ export async function submitDirectory(data: SubmitDirectoryData) {
         is_owner: data.runDirectory,
         message: data.message,
         status: 'pending', // This ensures new submissions start as pending
+        requested_category: data.categories,
       })
       .select();
 
@@ -42,23 +44,23 @@ export async function submitDirectory(data: SubmitDirectoryData) {
     }
 
     // Handle categories
-    if (data.categories) {
-      const categories = data.categories.split(',').map((cat) => cat.trim());
-      for (const category of categories) {
-        const { error: categoryError } = await supabase
-          .from('directory_categories')
-          .insert({
-            directory_id: directoryData[0].id,
-            category_id: await getCategoryId(supabase, category),
-          });
+    // if (data.categories) {
+    //   const categories = data.categories.split(',').map((cat) => cat.trim());
+    //   for (const category of categories) {
+    //     const { error: categoryError } = await supabase
+    //       .from('directory_categories')
+    //       .insert({
+    //         directory_id: directoryData[0].id,
+    //         category_id: await getCategoryId(supabase, category),
+    //       });
 
-        if (categoryError) {
-          throw new Error(
-            `Failed to insert category: ${categoryError.message}`
-          );
-        }
-      }
-    }
+    //     if (categoryError) {
+    //       throw new Error(
+    //         `Failed to insert category: ${categoryError.message}`
+    //       );
+    //     }
+    //   }
+    // }
 
     console.log('Directory submitted successfully:', directoryData[0]);
     revalidatePath('/explore');

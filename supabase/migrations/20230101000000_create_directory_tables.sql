@@ -10,6 +10,7 @@ CREATE TABLE directories (
   contact_info VARCHAR(255),
   is_owner BOOLEAN DEFAULT FALSE,
   submission_link VARCHAR(255),
+   primary_category_id UUID REFERENCES categories(id),
   message TEXT,
     status VARCHAR(20) CHECK (status IN ('pending', 'approved', 'rejected', 'deleted', 'suspended', 'under_review')) DEFAULT 'pending',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -50,3 +51,5 @@ INSERT INTO categories (name) VALUES
   ('Education'),
   ('SaaS'),
   ('Jobs');
+
+

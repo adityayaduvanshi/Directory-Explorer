@@ -1,11 +1,13 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, BarChart } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { SparklineAreaCell } from '@/components/sparkline-area-chart';
+import { renderPieChart } from '@/components/harvey-pie-chart';
 
 export type Directory = {
   id: string;
@@ -13,8 +15,11 @@ export type Directory = {
   logo_url: string;
   monthly_traffic: number;
   dr_da: number;
+  dr_da1: number;
   pricing: string;
   website_link: string;
+  primary_category_id: string;
+  monthly_traffic_trend: number[];
 };
 
 export const columns: ColumnDef<Directory>[] = [
@@ -45,11 +50,41 @@ export const columns: ColumnDef<Directory>[] = [
   },
   {
     accessorKey: 'monthly_traffic',
-    header: 'Monthly Traffic',
+    header: 'monthly traffic',
+    // header: ({ column }) => {
+    //   return (
+    //     <Button
+    //       variant="ghost"
+    //       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    //     >
+    //       Monthly Traffic
+    //       <ArrowUpDown className="ml-2 h-4 w-4" />
+    //     </Button>
+    //   );
+    // },
+    cell: ({ row }) => {
+      const traffic = row.getValue('monthly_traffic') as number;
+      const trend = row.original.monthly_traffic_trend;
+      return (
+        <div className="w-full flex justify-center">
+          <SparklineAreaCell data={trend} />
+        </div>
+      );
+    },
   },
   {
-    accessorKey: 'dr_da',
+    accessorKey: 'dr_da1',
     header: 'DR/DA',
+    cell: ({ row }) => {
+      const traffic = row.getValue('dr_da') as number;
+      const dr_da1 = row.original.dr_da1;
+
+      return (
+        <div className="w-full flex justify-center">
+          {renderPieChart(dr_da1)}
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'pricing',
@@ -81,26 +116,6 @@ export const columns: ColumnDef<Directory>[] = [
         >
           Visit ↗
         </Link>
-      );
-    },
-  },
-  {
-    accessorKey: 'website_link',
-    enableSorting: false,
-    header: 'Submit Link',
-    cell: ({ row }) => {
-      const website_link = row.getValue('website_link') as string;
-      return (
-        <div className="">
-          <Link
-            href={website_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }))}
-          >
-            Submit ↗
-          </Link>
-        </div>
       );
     },
   },
