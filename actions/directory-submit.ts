@@ -5,12 +5,12 @@ import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
 type SubmitDirectoryData = {
-  websiteLink: string;
-  categories: string;
-  contactInfo: string;
-  runDirectory: boolean;
-  message: string;
-  requestedCategory: string;
+  websiteLink?: string;
+  categories?: string;
+  contactInfo?: string;
+  runDirectory?: boolean;
+  message?: string;
+  // requestedCategory?: string;
 };
 
 export async function submitDirectory(data: SubmitDirectoryData) {
@@ -77,34 +77,34 @@ export async function submitDirectory(data: SubmitDirectoryData) {
   }
 }
 
-async function getCategoryId(
-  supabase: any,
-  categoryName: string
-): Promise<string> {
-  // Check if the category exists
-  const { data: existingCategory } = await supabase
-    .from('categories')
-    .select('id')
-    .eq('name', categoryName)
-    .single();
+// async function getCategoryId(
+//   supabase: any,
+//   categoryName: string
+// ): Promise<string> {
+//   // Check if the category exists
+//   const { data: existingCategory } = await supabase
+//     .from('categories')
+//     .select('id')
+//     .eq('name', categoryName)
+//     .single();
 
-  if (existingCategory) {
-    return existingCategory.id;
-  }
+//   if (existingCategory) {
+//     return existingCategory.id;
+//   }
 
-  // If the category doesn't exist, create it
-  const { data: newCategory, error } = await supabase
-    .from('categories')
-    .insert({ name: categoryName })
-    .select()
-    .single();
+//   // If the category doesn't exist, create it
+//   const { data: newCategory, error } = await supabase
+//     .from('categories')
+//     .insert({ name: categoryName })
+//     .select()
+//     .single();
 
-  if (error) {
-    throw new Error(`Failed to create new category: ${error.message}`);
-  }
+//   if (error) {
+//     throw new Error(`Failed to create new category: ${error.message}`);
+//   }
 
-  return newCategory.id;
-}
+//   return newCategory.id;
+// }
 
 function isValidUrl(string: string) {
   try {

@@ -5,6 +5,10 @@ import {
   Tooltip,
   TooltipProps,
 } from 'recharts';
+import {
+  NameType,
+  ValueType,
+} from 'recharts/types/component/DefaultTooltipContent';
 export const SparklineAreaCell: React.FC<{ data: number[] }> = ({ data }) => {
   const minValue = Math.min(...data);
   const maxValue = Math.max(...data);
