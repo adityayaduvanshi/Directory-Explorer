@@ -7,6 +7,7 @@ import {
   useReactTable,
   SortingState,
   getSortedRowModel,
+  getPaginationRowModel,
 } from '@tanstack/react-table';
 
 import {
@@ -18,7 +19,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useState } from 'react';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown } from '@/components/icons/icons';
+// import { ArrowUpDown } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +39,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       sorting,
     },
@@ -45,26 +48,33 @@ export function DataTable<TData, TValue>({
   return (
     <div className="">
       <Table>
-        <TableHeader className="bg-gray-200">
+        <TableHeader className="bg-gray-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead
                     key={header.id}
-                    className="font-semibold text-gray-700 text-center"
+                    className={`font-semibold text-gray-600 text-center ${
+                      header.id === 'name' ? 'px-4' : 'px-0'
+                    }`}
                   >
                     {header.isPlaceholder ? null : (
-                      <div className="flex items-center justify-center">
+                      <div
+                        className={`flex items-center ${
+                          header.id === 'name'
+                            ? ' justify-start'
+                            : 'justify-center'
+                        } `}
+                      >
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
                         {header.column.getCanSort() && (
-                          <ArrowUpDown
-                            className="ml-2 h-4 w-4 cursor-pointer"
-                            onClick={() => header.column.toggleSorting()}
-                          />
+                          <button onClick={() => header.column.toggleSorting()}>
+                            <ArrowUpDown className="ml-2 h-4 w-4 cursor-pointer fill-gray-600" />
+                          </button>
                         )}
                       </div>
                     )}

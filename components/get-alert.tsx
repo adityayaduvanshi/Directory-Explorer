@@ -3,7 +3,11 @@ import { Button } from './ui/button';
 
 const GetAlert = () => {
   return (
-    <Button variant="outline" size="sm" className="text-gray-600 rounded-2xl">
+    <Button
+      variant="outline"
+      size="sm"
+      className="text-gray-600 px-6 rounded-[5rem] bg-gray-100"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5 mr-2"

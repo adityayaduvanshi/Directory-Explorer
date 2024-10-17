@@ -16,10 +16,10 @@ export default function ExplorePage() {
 
 function ExploreContent() {
   return (
-    <div className="space-y-2">
+    <div className="space-y-12   h-screen overflow-y-auto custom-scrollbar">
       <header className="hidden md:flex px-2 md:px-6 justify-between  items-start">
         <Logo />
-        <div className=" flex items-center gap-2">
+        <div className=" flex items-center gap-x-5">
           <GetAlert />
           <SuggestDirectoryModal />
         </div>

@@ -31,7 +31,7 @@ export const renderPieChart = (percentage: number) => {
           nameKey="name"
           cx="50%"
           cy="50%"
-          outerRadius={20}
+          // outerRadius={20}
           startAngle={90}
           endAngle={-270}
         >
@@ -39,9 +39,7 @@ export const renderPieChart = (percentage: number) => {
           <Cell fill="#e5e7eb" />
         </Pie>
       </PieChart>
-      <span className={`font-medium ${getColor(percentage)}`}>
-        {percentage}%
-      </span>
+      <span className={`font-medium  text-gray-900`}>{percentage}</span>
     </div>
   );
 };

@@ -29,6 +29,7 @@ import {
   directorySubmitSchema,
   DirectorySubmitValues,
 } from '@/schema/submission-form';
+import { PlusIcon } from 'lucide-react';
 
 export function SuggestDirectoryModal() {
   const [open, setOpen] = useState(false);
@@ -72,8 +73,8 @@ export function SuggestDirectoryModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className=" bg-black rounded-2xl " size="sm">
-          + Suggest a Directory
+        <Button className=" bg-black rounded-[5rem] px-6 " size="sm">
+          <PlusIcon className=" h-4 w-4 mr-1" /> Suggest a Directory
         </Button>
       </DialogTrigger>
       <DialogContent aria-describedby="" className="sm:max-w-[425px]">
