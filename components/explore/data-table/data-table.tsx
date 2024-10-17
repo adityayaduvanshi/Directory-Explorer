@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ColumnDef,
@@ -8,7 +8,7 @@ import {
   SortingState,
   getSortedRowModel,
   getPaginationRowModel,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -17,9 +17,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { useState } from 'react';
-import { ArrowUpDown } from '@/components/icons/icons';
+} from "@/components/ui/table";
+import { useState } from "react";
+import { ArrowUpDown } from "@/components/icons/icons";
+import { Button } from "@/components/ui/button";
 // import { ArrowUpDown } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
@@ -40,6 +41,7 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+
     state: {
       sorting,
     },
@@ -56,15 +58,15 @@ export function DataTable<TData, TValue>({
                   <TableHead
                     key={header.id}
                     className={`font-semibold text-gray-600 text-center ${
-                      header.id === 'name' ? 'px-4' : 'px-0'
+                      header.id === "name" ? "px-4" : "px-0"
                     }`}
                   >
                     {header.isPlaceholder ? null : (
                       <div
                         className={`flex items-center ${
-                          header.id === 'name'
-                            ? ' justify-start'
-                            : 'justify-center'
+                          header.id === "name"
+                            ? " justify-start"
+                            : "justify-center"
                         } `}
                       >
                         {flexRender(
@@ -89,13 +91,13 @@ export function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
+                data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
                     className={`
-                      ${cell.column.id === 'name' ? 'text-left' : 'text-center'}
+                      ${cell.column.id === "name" ? "text-left" : "text-center"}
                     `}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -112,6 +114,68 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+
+      <div className="flex items-center justify-between py-8">
+        <div className="flex items-center gap-2">
+          <Button
+            className={`border border-black rounded-lg px-6 py-2 bg-gray-100 text-black font-semibold transition-all duration-150 ease-in-out
+    ${
+      !table.getCanPreviousPage()
+        ? "opacity-50 cursor-not-allowed"
+        : "hover:bg-black hover:text-white"
+    }`}
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+
+          <Button
+            className={`ml-3 border border-black rounded-lg px-6 py-2 bg-gray-100 text-black font-semibold transition-all duration-150 ease-in-out
+    ${
+      !table.getCanNextPage()
+        ? "opacity-50 cursor-not-allowed"
+        : "hover:bg-black hover:text-white"
+    }`}
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+        <span className="flex items-center gap-1">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
+          </strong>
+        </span>
+        <div className="flex items-center gap-2">
+          <span>Go to page:</span>
+          <input
+            type="number"
+            defaultValue={table.getState().pagination.pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              table.setPageIndex(page);
+            }}
+            className="w-16 border rounded p-1"
+          />
+        </div>
+        <select
+          value={table.getState().pagination.pageSize}
+          onChange={(e) => {
+            table.setPageSize(Number(e.target.value));
+          }}
+          className="border rounded p-2"
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }

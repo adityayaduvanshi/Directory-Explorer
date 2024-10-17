@@ -1,5 +1,7 @@
 import { SuggestDirectoryModal } from '@/components/explore/directory-submit-form';
 import GetAlert from '../get-alert';
+import { Button } from '../ui/button';
+import { PlusIcon } from 'lucide-react';
 
 export function ExploreHeader() {
   return (
@@ -12,7 +14,15 @@ export function ExploreHeader() {
         internet.
       </p>
       <div className="flex pt-4 space-x-5">
-        <SuggestDirectoryModal />
+        {/* <SuggestDirectoryModal /> */}
+        <Button
+            onClick={() => window.open("/https://tally.so/", "_blank")}
+            className=" bg-black rounded-[5rem] px-6 "
+            size="sm"
+          >
+            <PlusIcon className=" h-4 w-4 mr-1" /> Suggest a Directory
+          </Button>
+
         <GetAlert />
       </div>
     </div>

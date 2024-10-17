@@ -2,7 +2,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown, BarChart } from 'lucide-react';
+import { ArrowUpDown, BarChart,SquareArrowOutUpRight } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -121,9 +121,9 @@ export const columns: ColumnDef<Directory>[] = [
           href={website_link}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }))}
+          className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }),'border border-gray-300 rounded-[20px] px-5 py-3')}
         >
-          Visit ↗
+          Visit <SquareArrowOutUpRight className='h-3 w-4 ml-2' />
         </Link>
       );
     },

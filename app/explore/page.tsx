@@ -1,10 +1,12 @@
-import { SuggestDirectoryModal } from '@/components/explore/directory-submit-form';
-import { ExploreHeader } from '@/components/explore/header';
-import DirectoryTable from '@/components/explore/table/directory-table';
-import GetAlert from '@/components/get-alert';
-import { Logo } from '@/components/logo/logo';
-import { Button } from '@/components/ui/button';
-import { Suspense } from 'react';
+"use client";
+import { SuggestDirectoryModal } from "@/components/explore/directory-submit-form";
+import { ExploreHeader } from "@/components/explore/header";
+import DirectoryTable from "@/components/explore/table/directory-table";
+import GetAlert from "@/components/get-alert";
+import { Logo } from "@/components/logo/logo";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
+import { Suspense } from "react";
 
 export default function ExplorePage() {
   return (
@@ -21,7 +23,15 @@ function ExploreContent() {
         <Logo />
         <div className=" flex items-center gap-x-5">
           <GetAlert />
-          <SuggestDirectoryModal />
+          <Button
+            onClick={() => window.open("/https://tally.so/", "_blank")}
+            className=" bg-black rounded-[5rem] px-6 "
+            size="sm"
+          >
+            <PlusIcon className=" h-4 w-4 mr-1" /> Suggest a Directory
+          </Button>
+
+          {/* <SuggestDirectoryModal /> */}
         </div>
       </header>
       <ExploreHeader />
@@ -40,6 +50,12 @@ function ExploreContent() {
       </div> */}
 
         <DirectoryTable />
+      </div>
+
+      <div className="flex items-center justify-between bg-black text-white px-2 py-5 border border-blue-500">
+        
+          
+          <span className="text-sm font-normal pl-3">Directory Explorer</span>
       </div>
     </div>
   );
