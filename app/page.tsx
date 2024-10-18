@@ -19,7 +19,7 @@ export default function Home() {
 function ExploreContent() {
   return (
     <div className="space-y-12   overflow-y-auto custom-scrollbar">
-      <header className="hidden md:flex px-2 md:px-6 justify-between  items-start">
+      <header className="hidden lg:flex px-2 md:px-6 justify-between  items-start">
         <Logo />
         <div className=" flex items-center gap-x-5">
           <GetAlert />
