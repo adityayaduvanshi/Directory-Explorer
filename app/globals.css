@@ -83,34 +83,26 @@ body {
   }
 }
 /* Custom Scrollbar Styles */
+/* Custom Scrollbar Styles */
 .custom-scrollbar {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #e0e0e0 transparent; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  display: none; /* WebKit */
-}
-/* .custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e0 #edf2f7;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 2px; /* Very thin scrollbar */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #edf2f7;
-  border-radius: 4px;
+  background: transparent; /* Transparent track */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e0;
-  border-radius: 4px;
-  border: 2px solid #edf2f7;
+  background-color: #e0e0e0; /* Light gray color */
+  border-radius: 1px; /* Minimal rounding */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #a0aec0;
-} */
+  background-color: #c0c0c0; /* Slightly darker on hover */
+}

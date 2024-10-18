@@ -1,24 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useDebounce = (
-  callback: (...args: any[]) => void,
-  delay: number
-) => {
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  const debouncedCallback = useCallback(
-    (...args: any[]) => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      const newTimer = setTimeout(() => {
-        callback(...args);
-      }, delay);
-      setTimer(newTimer);
-    },
-    [callback, delay, timer]
-  );
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-  return debouncedCallback;
-};
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+export default useDebounce;
