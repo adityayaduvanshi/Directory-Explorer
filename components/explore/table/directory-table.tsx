@@ -43,7 +43,7 @@ const TableSkeleton = () => (
 );
 
 const DirectoryTable = () => {
-  const [directories, setDirectories] = useState<Directory[]>([]);
+  const [directories, setDirectories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const searchParams = useSearchParams();

@@ -56,7 +56,7 @@ const categoryIcons: { [key: string]: React.ReactNode } = {
 
 export default async function Sidebar() {
   const categories = await getCategories();
-  const groupedCategories: CategoryGroup[] = [
+  const groupedCategories = [
     {
       name: 'Audio & Video',
       categories: categories.filter((c) =>
